@@ -1,8 +1,33 @@
 const mongoose = require('mongoose');
+const {Schema} = require("mongoose");
 
-const ItemSchema = mongoose.Schema({
-
-});
+const ItemSchema = new mongoose.Schema(
+    {
+        wishlist: {
+            type: Schema.Types.ObjectId,
+            ref: 'Wishlist',
+            required: true
+        },
+        name: String,
+        description: String,
+        url: String,
+        price: {
+            type: Number,
+            min: [0, 'Price must not be negative'],
+            default: 0
+        },
+        quantity: {
+            type: Number,
+            min: [0, 'Quantity must not be negative'],
+            default: 0
+        },
+        priority: {
+            type: Number,
+            min: [0, 'Priority must not be negative'],
+            default: 0
+        },
+    }
+);
 
 const Item = mongoose.model("Item", ItemSchema);
 
