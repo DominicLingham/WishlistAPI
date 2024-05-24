@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema(
         }, //TODO: Add validation
         hash: String,
         salt: String,
+    },
+    {
+        timestamps: true,
     }
 );
 

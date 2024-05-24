@@ -26,9 +26,18 @@ const ItemSchema = new mongoose.Schema(
             min: [0, 'Priority must not be negative'],
             default: 0
         },
-    }
+    },
+    {
+        toJSON: {virtuals: true},
+        toObject: {virtuals: true},
+        timestamps: true,
+    },
 );
+
+ItemSchema.virtual('totalPrice').get(function () {
+    return this.price * this.quantity;
+});
 
 const Item = mongoose.model("Item", ItemSchema);
 
-module.exports(Item);
+module.exports = Item;

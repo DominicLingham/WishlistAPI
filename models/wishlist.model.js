@@ -29,8 +29,17 @@ const WishlistSchema = new mongoose.Schema(
             required: false,
         },
     },
-    {timestamps: true}
+    {
+        toJSON: {virtuals: true},
+        toObject: {virtuals: true},
+        timestamps: true,
+    }
 );
+
+WishlistSchema.virtual('totalWishlistPrice').get(async function () {
+    const items = await mongoose.model('Item').find({wishlist: this._id});
+    return items.reduce((total, item) => total + item.totalPrice, 0);
+});
 
 const Wishlist = mongoose.model("Wishlist", WishlistSchema);
 
