@@ -10,6 +10,10 @@ const router = express.Router();
 
 router.get('/:id', getItemById);
 
+router.get(":userId", getItemsByUser);
+
 router.get("/:wishlistId/items", getItemsByWishlist);
+
+router.post("/", addItem);
 
 module.exports = router;

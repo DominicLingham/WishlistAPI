@@ -41,6 +41,6 @@ WishlistSchema.virtual('totalWishlistPrice').get(async function () {
     return items.reduce((total, item) => total + item.totalPrice, 0);
 });
 
-const Wishlist = mongoose.model("Wishlist", WishlistSchema);
+const Wishlist = mongoose.model("Wishlist", WishlistSchema, "Wishlists");
 
 module.exports = Wishlist;

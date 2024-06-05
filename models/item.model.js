@@ -38,6 +38,6 @@ ItemSchema.virtual('totalPrice').get(function () {
     return this.price * this.quantity;
 });
 
-const Item = mongoose.model("Item", ItemSchema);
+const Item = mongoose.model("Item", ItemSchema, "Items");
 
 module.exports = Item;
