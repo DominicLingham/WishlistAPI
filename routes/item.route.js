@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/:id', getItemById);
 
-router.get(":userId", getItemsByUser);
+router.get("/:userId", getItemsByUser);
 
 router.get("/:wishlistId/items", getItemsByWishlist);
 

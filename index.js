@@ -4,6 +4,7 @@ require("dotenv").config();
 const connectDB = require("./db/db");
 const itemRoutes = require("./routes/item.route");
 const wishlistRoutes = require("./routes/wishlist.route");
+const authRoutes = require("./routes/auth.route");
 
 const port = process.env.PORT;
 
@@ -13,7 +14,9 @@ app.use(cors({origin: "*"}));
 
 // routes
 app.use("/item", itemRoutes);
-app.use("/wishlist", wishlistRoutes)
+app.use("/wishlist", wishlistRoutes);
+app.use("/auth", authRoutes);
+
 
 app.get("/", (req, res) => {
     res.send("Hello");

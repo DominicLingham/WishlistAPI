@@ -6,15 +6,17 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Username is required'],
             unique: true
-        }, //TODO: Add validation
-        hash: String,
-        salt: String,
+        },
+        password: {
+            type: String,
+            required: [true, 'Password is required'],
+        }
     },
     {
         timestamps: true,
     }
 );
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema, 'Users');
 
 module.exports = User;

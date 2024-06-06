@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const {Schema} = require("mongoose");
 
 const ItemSchema = new mongoose.Schema(
     {
         wishlist: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.SchemaTypes.ObjectId,
             ref: 'Wishlist',
             required: true
         },

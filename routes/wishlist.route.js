@@ -1,15 +1,15 @@
 const express = require('express');
 const {
-    getWishlistNames,
     addWishlist,
-    getWishlistById, getAllWishlists
+    getWishlistById,
+    getWishlistsForUser
 } = require('../controllers/wishlists.controller');
 
 const router = express.Router();
 
-router.get('/', getAllWishlists)
+router.get('/user/:userId', getWishlistsForUser);
 
-router.get('/:id', getWishlistById)
+router.get('/:id', getWishlistById);
 
 router.post('/', addWishlist);
 

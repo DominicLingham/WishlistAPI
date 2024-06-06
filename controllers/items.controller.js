@@ -1,4 +1,5 @@
 const Item = require('../models/item.model');
+const Wishlist = require('../models/wishlist.model');
 
 const getItemById = async (req, res) => {
     try {
@@ -18,10 +19,10 @@ const getItemsByWishlist = async (req, res) => {
     try {
         const {wishlistId} = req.params;
         const items = await Item.find({wishlist: wishlistId});
-        if (!items.length) {
+        if (!items || items.length === 0) {
             return res.status(404).json({message: 'No items found for this wishlist'});
         }
-        res.status(200).json(items);
+        res.status(200).json({data: items});
     } catch (error) {
         res.status(500).json({error: error});
     }
@@ -29,8 +30,15 @@ const getItemsByWishlist = async (req, res) => {
 
 const addItem = async (req, res) => {
     try {
-        const item = Item.create(req.body);
-        res.status(201).json(item);
+        const item = await Item.create(req.body);
+
+        //Populate wishlist items with the saved item id
+        const wishlistId = req.body.wishlist;
+        const wishlist = await Wishlist.findById(wishlistId);
+        wishlist.items.push(item._id);
+        await wishlist.save();//TODO: update to save whole item data
+
+        res.status(201).json({message: "Success", data: item});
     } catch (error) {
         res.status(500).json({error: error});
     }
