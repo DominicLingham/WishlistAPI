@@ -5,15 +5,16 @@ const {
     getItemsByWishlist,
     addItem,
 } = require('../controllers/items.controller');
+const {verifyToken} = require('../middleware/authMiddleware')
 
 const router = express.Router();
 
-router.get('/:id', getItemById);
+router.get('/:id', verifyToken, getItemById);
 
-router.get("/:userId", getItemsByUser);
+router.get("/:userId", verifyToken, getItemsByUser);
 
-router.get("/:wishlistId/items", getItemsByWishlist);
+router.get("/:wishlistId/items", verifyToken, getItemsByWishlist);
 
-router.post("/", addItem);
+router.post("/", verifyToken, addItem);
 
 module.exports = router;
