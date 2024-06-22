@@ -10,20 +10,15 @@ const port = process.env.PORT;
 
 const app = express();
 app.use(express.json());
-app.use(cors({origin: "*"}));
+app.use(cors({ origin: "*" }));
 
 // routes
 app.use("/item", itemRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/auth", authRoutes);
 
-
-app.get("/", (req, res) => {
-    res.send("Hello");
-});
-
 connectDB().then(() => {
-    app.listen(port, () => {
-        console.log(`app is listening on port: ${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`app is listening on port: ${port}`);
+  });
 });
