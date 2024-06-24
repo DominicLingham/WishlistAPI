@@ -8,10 +8,10 @@ const { verifyToken } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get("/user/:userId", getWishlistsForUser);
+router.get("/user/:userId", verifyToken, getWishlistsForUser);
 
-router.get("/:id", getWishlistById);
+router.get("/:id", verifyToken, getWishlistById);
 
-router.post("/", addWishlist);
+router.post("/", verifyToken, addWishlist);
 
 module.exports = router;
