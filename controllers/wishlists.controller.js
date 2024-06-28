@@ -32,14 +32,10 @@ const getWishlistById = async (req, res) => {
   try {
     const { id } = req.params;
     const wishlist = await Wishlist.findById(id);
-    const wishlistPrice = await wishlist.calculateTotalWishlistPrice();
-
-    const wishlistObj = wishlist.toObject();
-    wishlistObj.totalPrice = wishlistPrice;
 
     res.status(200).json({
       message: "Wishlist found successfully",
-      data: { wishlist: wishlistObj },
+      data: { wishlist },
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
