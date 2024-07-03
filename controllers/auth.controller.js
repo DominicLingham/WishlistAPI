@@ -11,6 +11,14 @@ const express = require("express");
 
 const registerUser = async (req, res) => {
   const { username, password } = req.body;
+
+  // Validate the inputs
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Username and password are required" });
+  }
+
   const hashedPassword = await bcrypt.hash(password, 13);
 
   try {
