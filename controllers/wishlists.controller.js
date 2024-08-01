@@ -10,16 +10,16 @@ const express = require("express");
  */
 const getWishlistsForUser = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const wishlists = await Wishlist.find({ user: userId });
+    const { id } = req.params;
+    const wishlists = await Wishlist.find({ user: id });
 
     if (!wishlists || wishlists.length === 0) {
-      res.status(404).json({ message: "No wishlist found" });
+      return res.status(404).json({ message: "No wishlist found" });
     }
 
-    res.status(200).json({ message: "Success", data: wishlists });
+    return res.status(200).json({ message: "Success", data: wishlists });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 

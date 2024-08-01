@@ -9,7 +9,7 @@ const { verifyToken } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get("/user/", verifyToken, getWishlistsForUser);
+router.get("/user/:id", verifyToken, getWishlistsForUser);
 
 router.get("/:id", verifyToken, getWishlistById);
 
